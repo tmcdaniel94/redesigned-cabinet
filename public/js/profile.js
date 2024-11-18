@@ -1,10 +1,10 @@
 const newFormHandler = async (event) => {
     event.preventDefault();
   
-    const name = document.querySelector('#post-title').value.trim();
-    const description = document.querySelector('#post-body').value.trim();
+    const title = document.querySelector('#post-title').value.trim();
+    const body = document.querySelector('#post-body').value.trim();
   
-    if (name && description) {
+    if (title && body) {
       const response = await fetch(`/api/posts`, {
         method: 'POST',
         body: JSON.stringify({ title, body }),
@@ -32,7 +32,10 @@ const newFormHandler = async (event) => {
       if (response.ok) {
         document.location.replace('/profile');
       } else {
-        alert('Failed to delete post');
+        // alert('Failed to delete post');
+        const errorData = await response.json(); // Read the response body
+        console.error('Failed to create post:', errorData);
+        alert(`Failed to create post: ${errorData.message || 'Unknown error'}`);
       }
     }
   };
@@ -41,7 +44,14 @@ const newFormHandler = async (event) => {
     .querySelector('.new-post-form')
     .addEventListener('submit', newFormHandler);
   
-  document
-    .querySelector('.post-list')
-    .addEventListener('click', delButtonHandler);
+//   document
+//     .querySelector('.post-list')
+//     .addEventListener('click', delButtonHandler);
+
+const postList = document.querySelector('.post-list');
+if (postList) {
+  postList.addEventListener('click', delButtonHandler);
+} else {
+  console.warn('.post-list not found, no posts to delete');
+}
   

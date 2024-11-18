@@ -1,11 +1,13 @@
 [
     {
       "title": "My First Post",
-      "body": "This is my first post on this blog. Thanks for reading!"
+      "body": "This is my first post on this blog. Thanks for reading!",
+      "date": "2024-11-18"
     },
     {
       "title": "My Second Post",
-      "body": "This is my second post on this blog. Thanks for reading!"
+      "body": "This is my second post on this blog. Thanks for reading!",
+      "date": "2024-11-18"
     }
   ]
   
