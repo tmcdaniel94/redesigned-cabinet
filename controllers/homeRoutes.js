@@ -8,20 +8,35 @@ router.get('/', async (req, res) => {
       // const userData = await User.findAll({});
       const user = req.session.user_id;
       const postData = await Post.findAll({
-        // include: [
-        //   {
-        //     model: User,
-        //     attributes: ['title'],
-        //   },
-        // ],
+        include: [
+          {
+            model: User,
+            attributes: ['name'],
+          },
+        ],
       });
-      const postsByUser = postData.filter(post => post.user_id === user);
+      // const postsByUser = postData.filter(post => post.user_id === user);
       // Serialize data so the template can read it
       // const posts = postData.map((post) => post.get({ plain: true }));
-  
+      const posts = postData.map((post) => { const plainPost = post.get({ plain: true });
+      
+        // Format the date_created field using Intl.DateTimeFormat
+        if (plainPost.date_created) {
+          const date = new Date(plainPost.date_created);
+          plainPost.date_created = new Intl.DateTimeFormat('en-US', {
+            month: 'long',
+            day: '2-digit',
+            year: 'numeric',
+          }).format(date); // Example format: "October 22, 2024"
+        }
+      
+        return plainPost;
+      });
+
+      // console.log(posts, 'taylor again');
       // Pass serialized data and session flag into template
       res.render('home', { 
-        posts: postsByUser, 
+        posts,
         logged_in: req.session.logged_in 
       });
       // res.json(postsByUser);

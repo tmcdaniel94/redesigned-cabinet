@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const User = require('./User');  // Import the User model
 
 class Post extends Model {}
 
@@ -40,5 +41,11 @@ Post.init(
     modelName: 'post',
   }
 );
+
+// Set up the relationship between Post and User
+Post.belongsTo(User, {
+  foreignKey: 'user_id',
+  targetKey: 'id', // user_id in Post references id in User
+});
 
 module.exports = Post;
