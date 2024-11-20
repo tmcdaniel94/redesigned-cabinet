@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, User } = require('../models');
+const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -55,6 +55,16 @@ router.get('/', async (req, res) => {
             model: User,
             attributes: ['name'],
           },
+          // {
+          //   model: Comment,
+          //   attributes: ['body', 'created_at'],
+          //   include: [
+          //     {
+          //       model: User,
+          //       attributes: ['name'],
+          //     }
+          //   ]
+          // }
         ],
       });
   
@@ -68,6 +78,28 @@ router.get('/', async (req, res) => {
       res.status(500).json(err);
     }
   });
+
+// router.get('/comment', async (req, res) => {
+//   try {
+//     const commentData = await Comment.findAll({
+//       include: [
+//         {
+//           model: User,
+//           attributes: ['name'],
+//         },
+//       ],
+//     });
+
+//     const comment = commentData.map((comment) => comment.get({ plain: true }));
+
+//     res.render('comment', {
+//       ...comment,
+//       logged_in: req.session.logged_in
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
   // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {

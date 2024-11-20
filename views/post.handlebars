@@ -2,4 +2,85 @@
   <h2>{{title}}</h2>
   <p>{{body}}</p>
   <p>Created by {{user.name}} on {{date_created}}</p>
+
+  <button id="comment-btn">Add Comment</button>
+
+  <!-- Hidden comment form -->
+  <div id="comment-form" style="display:none;">
+    <textarea id="comment-text" placeholder="Write your comment here"></textarea>
+    <button id="submit-comment">Submit Comment</button>
+  </div>
 </div>
+
+<!-- Script to handle button click and comment submission -->
+<script>
+  document.getElementById('comment-btn').addEventListener('click', function() {
+    // Toggle the visibility of the comment form
+    document.getElementById('comment-form').style.display = 'block';
+  });
+
+  document.getElementById('submit-comment').addEventListener('click', function() {
+    // Get the comment text from the textarea
+    const commentText = document.getElementById('comment-text').value;
+    const postId = {{id}};  // Assuming post ID is passed to the template
+
+    if (!commentText) {
+      alert("Please enter a comment.");
+      return;
+    }
+
+    // Send the comment to the server
+    fetch('/comment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        postId: postId,
+        comment: commentText
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert('Comment added successfully!');
+        // Optionally, update the page with the new comment without refreshing
+        // Example: Add the comment to the page dynamically
+        const commentContainer = document.getElementById('comments');
+        const newComment = document.createElement('div');
+        newComment.textContent = commentText;
+        commentContainer.appendChild(newComment);
+      } else {
+        alert('Failed to add comment.');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('There was an error submitting the comment.');
+    });
+  });
+</script>
+
+<!-- Display comments -->
+<div id="comments">
+  <!-- Existing comments will go here -->
+</div>
+
+{{!-- <div>
+  <h2>Comments</h3>
+  {{#each comments}}
+  <div>
+    <p>{{comment_text}}</p>
+    <p>Created by {{user.name}} on {{date_created}}</p>
+  </div>
+  {{/each}}
+</div> --}}
+
+
+
+  {{!-- <script>
+    document.getElementById('comment-btn').addEventListener('click', function() {
+
+      
+    });
+  </script> --}}

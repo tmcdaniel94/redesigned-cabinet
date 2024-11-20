@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
@@ -12,6 +12,23 @@ router.post('/', withAuth, async (req, res) => {
     res.status(200).json(newPost);
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+
+router.post('/comment', withAuth, async (req, res) => {
+  const { postId, comment } = req.body;
+  try {
+    // Create a new comment
+    const newComment = await Comment.create({
+      post_id: postId,
+      text: comment,
+      user_id: req.session.user_id, // Assuming the logged-in user ID is stored in the session
+    });
+    // Respond with a success message
+    res.json({ success: true, comment: newComment });
+  } catch (err) {
+    console.error('Error adding comment:', err);
+    res.status(500).json({ success: false, message: 'Failed to add comment' });  
   }
 });
 
