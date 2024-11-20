@@ -18,12 +18,14 @@
       <nav>
         <!-- Conditionally render login or logout links -->
         {{#if logged_in}}
-        <a href="/profile">profile</a> |
+        <a href="/profile">dashboard</a> |
         <button class="no-button" id="logout">logout</button>
         {{else}}
+        <a href="#" id="alert-sign-in">dashboard</a> |
         <a href="/login">login</a>
         {{/if}}
       </nav>
+
     </header>
     <main class="container container-fluid mt-5">
       <!-- Render the sub layout -->
@@ -38,6 +40,14 @@
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
+
+  <!-- JavaScript for alert on 'dashboard' button click -->
+  <script>
+    document.getElementById('alert-sign-in').addEventListener('click', function(event) {
+      event.preventDefault();
+      alert('Please sign in to access your dashboard!');
+    });
+  </script>
+
 </body>
-{{!-- {{log this}} --}}
 </html>
