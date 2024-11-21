@@ -49,13 +49,13 @@ Comment.init(
 );
 
 // Set up the relationship between Comment and User
-Comment.belongsTo(Post, {
-  foreignKey: 'post_id',
-  // targetKey: 'id', // post_id in Comment references id in Post
-});
+// Comment.belongsTo(Post, {
+//   foreignKey: 'post_id',
+//   // targetKey: 'id', // post_id in Comment references id in Post
+// });
 
-Comment.belongsTo(User, {
-  foreignKey: 'user_id',
-});
+// Comment.belongsTo(User, {
+//   foreignKey: 'user_id',
+// });
 
 module.exports = Comment;
