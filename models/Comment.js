@@ -23,6 +23,14 @@ Comment.init(
       allowNull: false,
       defaultValue: DataTypes.NOW,
     },
+    post_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'post',
+        key: 'id',
+      },
+      allowNull: false,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -41,9 +49,13 @@ Comment.init(
 );
 
 // Set up the relationship between Comment and User
+Comment.belongsTo(Post, {
+  foreignKey: 'post_id',
+  // targetKey: 'id', // post_id in Comment references id in Post
+});
+
 Comment.belongsTo(User, {
   foreignKey: 'user_id',
-  targetKey: 'id', // user_id in Comment references id in User
 });
 
 module.exports = Comment;

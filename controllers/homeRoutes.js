@@ -49,22 +49,25 @@ router.get('/', async (req, res) => {
 
   router.get('/post/:id', async (req, res) => {
     try {
+      const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  logging: console.log, // This will log SQL queries to the console
+});
       const postData = await Post.findByPk(req.params.id, {
         include: [
           {
             model: User,
             attributes: ['name'],
           },
-          // {
-          //   model: Comment,
-          //   attributes: ['body', 'created_at'],
-          //   include: [
-          //     {
-          //       model: User,
-          //       attributes: ['name'],
-          //     }
-          //   ]
-          // }
+          {
+            model: Comment,
+            attributes: ['body', 'created_at'],
+            include: [
+              {
+                model: User,
+                attributes: ['name'],
+              },
+            ],
+          },
         ],
       });
   
@@ -72,7 +75,7 @@ router.get('/', async (req, res) => {
   
       res.render('post', {
         ...post,
-        logged_in: req.session.logged_in
+        logged_in: req.session.logged_in,
       });
     } catch (err) {
       res.status(500).json(err);

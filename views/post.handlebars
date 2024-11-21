@@ -61,26 +61,16 @@
   });
 </script>
 
-<!-- Display comments -->
-<div id="comments">
+{{!-- Now trying to save comments to post when page is refreshed --}}
+<div>
+  <h2>Comments</h2>
+  <div id="comments">
   <!-- Existing comments will go here -->
-</div>
-
-{{!-- <div>
-  <h2>Comments</h3>
   {{#each comments}}
-  <div>
-    <p>{{comment_text}}</p>
-    <p>Created by {{user.name}} on {{date_created}}</p>
-  </div>
+    <div>
+      <p>{{comment_text}}</p>
+      <p>Created by {{user.name}} on {{date_created}}</p>
+    </div>
   {{/each}}
-</div> --}}
-
-
-
-  {{!-- <script>
-    document.getElementById('comment-btn').addEventListener('click', function() {
-
-      
-    });
-  </script> --}}
+  </div>
+</div>
