@@ -43,9 +43,15 @@
 
   <!-- JavaScript for alert on 'dashboard' button click -->
   <script>
-    document.getElementById('alert-sign-in').addEventListener('click', function(event) {
-      event.preventDefault();
-      alert('Please sign in to access your dashboard!');
+    document.addEventListener('DOMContentLoaded', function() {
+      const alertSignInBtn = document.getElementById('alert-sign-in');
+
+      if (alertSignInBtn) {
+        alertSignInBtn.addEventListener('click', function(event) {
+          event.preventDefault();
+          alert('Please sign in to access your dashboard!');
+        });
+      }
     });
   </script>
 

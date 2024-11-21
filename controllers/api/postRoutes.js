@@ -21,9 +21,10 @@ router.post('/comment', withAuth, async (req, res) => {
     // Create a new comment
     const newComment = await Comment.create({
       post_id: postId,
-      text: comment,
+      body: comment,
       user_id: req.session.user_id, // Assuming the logged-in user ID is stored in the session
     });
+    console.log(newComment, 'taylor');
     // Respond with a success message
     res.json({ success: true, comment: newComment });
   } catch (err) {
