@@ -68,8 +68,8 @@
   <!-- Existing comments will go here -->
   {{#each comments}}
     <div>
-      <p>{{comment_text}}</p>
-      <p>Created by {{user.name}} on {{date_created}}</p>
+      <p class="comment-text">{{body}}</p>
+      <p class="comment-created">Created by {{user.name}} on {{date_created}}</p>
     </div>
   {{/each}}
   </div>

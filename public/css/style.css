@@ -1,0 +1,15 @@
+#comments {
+    padding: 5%;
+}
+
+.comment-text {
+    background-color: aliceblue;
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+.comment-created {
+    color: grey;
+    font-size: 10px;
+    padding-top: 0;
+}

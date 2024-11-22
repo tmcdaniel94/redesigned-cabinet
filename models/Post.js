@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const User = require('./User');  // Import the User model
-const Comment = require('./Comment');  // Import the Comment model
+// const User = require('./User');  // Import the User model
+// const Comment = require('./Comment');  // Import the Comment model
 
 
 class Post extends Model {}
@@ -46,14 +46,14 @@ Post.init(
 );
 
 // Set up the relationship between Post and User
-Post.belongsTo(User, {
-  foreignKey: 'user_id',
-  targetKey: 'id', // user_id in Post references id in User
-});
+// Post.belongsTo(User, {
+//   foreignKey: 'user_id',
+//   targetKey: 'id', // user_id in Post references id in User
+// });
 
-Post.hasMany(Comment, {
-  foreignKey: 'post_id',
-  onDelete: 'CASCADE',
-});
+// Post.hasMany(Comment, {
+//   foreignKey: 'post_id',
+//   onDelete: 'CASCADE',
+// });
 
 module.exports = Post;

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post, Comment } = require('../../models');
+const { Post, Comment, User } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
@@ -24,7 +24,6 @@ router.post('/comment', withAuth, async (req, res) => {
       body: comment,
       user_id: req.session.user_id, // Assuming the logged-in user ID is stored in the session
     });
-    console.log(newComment, 'taylor');
     // Respond with a success message
     res.json({ success: true, comment: newComment });
   } catch (err) {
