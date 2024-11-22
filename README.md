@@ -7,6 +7,7 @@ Welcome to the Tech Blog! This platform allows users to read and comment on post
 [Description](#description)\
 [Installation](#installation)\
 [License](#license)\
+[Credits](#credits)\
 [Links](#links)\
 [Screenshots](#screenshots)
 
@@ -16,8 +17,14 @@ Clone the repo into your local repository and open the terminal. Use "npm instal
 ## License
 MIT
 
+## Credits
+Styling from jass.css is from UT's Module 14 mini project activity.
+
 ## Links
 To view this project's respository, navigate to: https://github.com/tmcdaniel94/redesigned-cabinet  
 To view my GitHub, navigate to: https://github.com/tmcdaniel94
   
 ## Screenshots
+![Home Page](/develop/images/homepage.png)
+![Dashboard](/develop/images/dashboard.png)
+![Blog Post](/develop/images/postcomments.png)
