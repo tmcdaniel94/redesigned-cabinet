@@ -13,3 +13,17 @@
     font-size: 10px;
     padding-top: 0;
 }
+
+.comment-btn {
+    margin: 10px;
+}
+
+#comment-text {
+    margin: 20px;
+    height: 20%;
+    width: 90%;
+}
+
+#submit-comment {
+    margin: 10px;
+}
